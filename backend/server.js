@@ -13,16 +13,20 @@ const port =process.env.PORT || 4000;
 
 //middlewares
 app.use(express.json());
-const corsOptions = {
-  origin: [
-    "https://being-foodie-1.onrender.com",
-    "https://being-foodie-2.onrender.com",
-    "http://localhost:3000",
-    "http://localhost:5173",
-  ],
-  credentials: true,
-};
-app.use(cors(corsOptions));
+
+// CORS - Allow all origins temporarily for debugging
+app.use(cors());
+
+// Additional CORS preflight headers
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, token");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
 
 // DB connection
 connectDB().catch((err) => {
