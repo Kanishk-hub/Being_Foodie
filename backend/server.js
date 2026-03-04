@@ -28,12 +28,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// DB connection
-connectDB().catch((err) => {
-  console.error("Failed to connect to database:", err);
-  process.exit(1);
-});
-
 // api endpoints
 app.use("/api/food", foodRouter);
 app.use("/images", express.static("uploads"));
@@ -56,6 +50,18 @@ app.use((err, req, res, next) => {
   res.status(500).json({ success: false, message: "Internal server error" });
 });
 
-app.listen(port, () => {
-  console.log(`Server Started on port: ${port}`);
-});
+// Start server after DB connects
+const startServer = async () => {
+  try {
+    await connectDB();
+    
+    app.listen(port, () => {
+      console.log(`Server Started on port: ${port}`);
+    });
+  } catch (err) {
+    console.error("Failed to start server:", err);
+    process.exit(1);
+  }
+};
+
+startServer();
