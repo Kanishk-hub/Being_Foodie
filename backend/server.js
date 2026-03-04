@@ -13,10 +13,22 @@ const port =process.env.PORT || 4000;
 
 //middlewares
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+  origin: [
+    "https://being-foodie-1.onrender.com",
+    "https://being-foodie-2.onrender.com",
+    "http://localhost:3000",
+    "http://localhost:5173",
+  ],
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 // DB connection
-connectDB();
+connectDB().catch((err) => {
+  console.error("Failed to connect to database:", err);
+  process.exit(1);
+});
 
 // api endpoints
 app.use("/api/food", foodRouter);
@@ -27,6 +39,17 @@ app.use("/api/order", orderRouter);
 
 app.get("/", (req, res) => {
   res.send("API Working");
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ success: false, message: "Route not found" });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error("Server error:", err);
+  res.status(500).json({ success: false, message: "Internal server error" });
 });
 
 app.listen(port, () => {
