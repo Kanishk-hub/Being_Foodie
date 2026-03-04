@@ -20,20 +20,25 @@ const Login = ({ url }) => {
   };
   const onLogin = async (event) => {
     event.preventDefault();
-    const response = await axios.post(url + "/api/user/login", data);
-    if (response.data.success) {
-      if (response.data.role === "admin") {
-        setToken(response.data.token);
-        setAdmin(true);
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("admin", true);
-        toast.success("Login Successfully");
-        navigate("/add")
-      }else{
-        toast.error("You are not an admin");
+    try {
+      const response = await axios.post(url + "/api/user/login", data);
+      if (response.data.success) {
+        if (response.data.role === "admin") {
+          setToken(response.data.token);
+          setAdmin(true);
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("admin", true);
+          toast.success("Login Successfully");
+          navigate("/add");
+        } else {
+          toast.error("You are not an admin");
+        }
+      } else {
+        toast.error(response.data.message || "Authentication failed");
       }
-    } else {
-      toast.error(response.data.message);
+    } catch (err) {
+      console.error(err);
+      toast.error("Network or server error. Check console or server logs.");
     }
   };
   useEffect(()=>{
