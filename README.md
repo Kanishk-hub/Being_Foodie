@@ -4,8 +4,8 @@ This repository hosts the source code for BEINGFOODIE, a dynamic food ordering w
 
 ## Demo
 
-- User Panel: [https://food-delivery-frontend-s2l9.onrender.com/](https://food-delivery-frontend-s2l9.onrender.com/)
-- Admin Panel: [https://food-delivery-admin-wrme.onrender.com/](https://food-delivery-admin-wrme.onrender.com/)
+- User Panel: [https://being-foodie-1.onrender.com/]
+- Admin Panel: [https://being-foodie-2.onrender.com/]
 
 ## Features
 
@@ -27,26 +27,13 @@ This repository hosts the source code for BEINGFOODIE, a dynamic food ordering w
 - Role-Based Identification
 - Beautiful Alerts
 
-## Screenshots
-
-![Hero](https://i.ibb.co/59cwY75/food-hero.png)
-- Hero Section
-
-![Products](https://i.ibb.co/JnNQPyQ/food-products.png)
-- Products Section
-
-![Cart](https://i.ibb.co/t2LrQ8p/food-cart.png)
-- Cart Page
-
-![Login](https://i.ibb.co/s6PgwkZ/food-login.png)
-- Login Popup
 
 ## Run Locally
 
 Clone the project
 
 ```bash
-    git clone https://github.com/Mshandev/Food-Delivery
+    git clone https://github.com/sinjinixoxo-create/Being_Foodie.git
 ```
 Go to the project directory
 
@@ -127,4 +114,4 @@ Just raise an issue, and we will discuss it.
 
 ## Feedback
 
-If you have any feedback, please reach out to me [here](https://www.linkedin.com/in/muhammad-shan-full-stack-developer/)
+If you have any feedback, please raise an issue in the repository or contact the project maintainers.
